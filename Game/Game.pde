@@ -1,3 +1,7 @@
+/*
+ * Queen Huong aka Judy
+ */
+
 Button buttons;
 String game_name = "GGJ 2016";
 int state;
@@ -15,9 +19,6 @@ void setup() {
   state = 0; // when the program loads, load the main menu
 
   buttons = new Button("Play Game", (width/2)-150, height/4);
-}
-
-void update() {
 }
 
 void draw() {

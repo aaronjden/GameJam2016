@@ -5,6 +5,6 @@ class Candle{
   Candle(int x, int y, int _xSize, int _ySize){
     xPos = x;
     yPos = y;
-
+    
   }
 }
