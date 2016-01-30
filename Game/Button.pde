@@ -20,6 +20,7 @@ class Button {
     rectMode(CENTER);
     fill(255);
     rect(x, y, w, h);
+    
     textAlign(CENTER);
     fill(0);
     text(button_name, x, y);

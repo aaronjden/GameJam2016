@@ -4,19 +4,39 @@ character actions
  item x,y, character x,y, health, sprite gifs
  //
  */
+
+/*
+    functions to make
+ boolean function for sharing coordinates with grabbed item
+ boolean for defend where touching dangerous elements nullifies damage
+ boolean for attack where if an enemy is within range, they lose health
+ character size is 24px
+ function for last direction faced- from 0 to 3 north clockwise
+ */
+
 class Adventurer {
+<<<<<<< HEAD
   int xpos, ypos, xsize, ysize, health, xfacing, yfacing, dropTime;
   //
   int gridSize = 64;
+=======
+>>>>>>> origin/master
   // coordinate from center, 3 hearts, 0 to 3, north to west
-  boolean grab, attack, defend;
-  //grabbing object, attacking, defending functions.
+  private int xpos;
+  private int ypos;
+  private int health;
+  private int facing;
 
+  //grabbing object, attacking, defending functions.
+  private boolean grab;
+  private boolean attack;
+  private boolean defend;
 
   Adventurer(int xp, int yp, int xf, int yf, int xs, int ys, int hp) {
     //location of adventurer (rectmode(center))
     xpos = xp;
     ypos = yp;
+<<<<<<< HEAD
     //size of adventurer (should be the same size if square)
     xsize = 25;
     ysize = 25;
@@ -84,6 +104,11 @@ class Adventurer {
     }
 
     //add control actions for attacking, defending, grabbing and dropping
+=======
+    grab = gb;
+    attack = atk;
+    defend = def;
+>>>>>>> origin/master
   }
 
   void display() {
@@ -111,7 +136,6 @@ class Adventurer {
     rect(xfacing, yfacing, xsize, ysize);
   }
 
-
   void update() {
     //update combines all class functions into one, less clutter on draw function.
     dropTime++;
@@ -119,5 +143,50 @@ class Adventurer {
 
     controls();
     display();
+  }
+
+  void controls() {
+    /*
+    if (keyPressed == true) {
+     //UP
+     if (key == 'w' && ypos > height/128) {
+     ypos= ypos-height/128;
+     }
+     //DOWN
+     if (key == 's' && ypos < height- height/128) {
+     ypos= ypos+height/128;
+     }
+     //RIGHT
+     if (key == 'd' && xpos > width/128) {
+     xpos= xpos+width/128;
+     }
+     //LEFT
+     if (key == 'a' && xpos < width- width/128 && width > width/128 ) {
+     xpos= xpos-width/128;
+     }
+     }
+     */
+
+    if (forwardPressed) {
+      ypos -= 2.0;
+    }
+    if (backwardPressed) {
+      ypos += 2.0;
+      if (ypos > 700) {
+        ypos = 700;
+      }
+    }
+    if (leftPressed) {
+      xpos -= 2.0;
+      if (xpos < 0) {
+        xpos = 0;
+      }
+    }
+    if (rightPressed) {
+      xpos += 2.0;
+      if (xpos > width - 10) {
+        xpos = width - 10;
+      }
+    }
   }
 }
