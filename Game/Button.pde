@@ -17,13 +17,16 @@ class Button {
   }
 
   void showButton() {
-    rectMode(CENTER);
     fill(255);
     rect(x, y, w, h);
+<<<<<<< HEAD
     
     textAlign(CENTER);
+=======
+
+>>>>>>> parent of 9ff4e52... Centered buttons (in the class)
     fill(0);
-    text(button_name, x, y);
+    text(button_name, x+(w/4), y+(h/2));
   }
 
   boolean clicked() {
