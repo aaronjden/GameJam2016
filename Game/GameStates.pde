@@ -12,10 +12,13 @@ void stateManager(int _state) {
 
 void main_menu() {
   text(game_name, (width/2) - 100, 100); //name of the game
-  buttons.showButton();
-  if (buttons.clicked()||key=='1') {
+  buttonPlayGame.showButton();
+  buttonExitGame.showButton();
+  if (buttonPlayGame.clicked()||key=='1') {
     state = 1;
     println("play button clicked or press 1");
+  } else if (buttonExitGame.clicked() || key == '2'){
+    exit();
   }
 }
 

@@ -19,9 +19,9 @@ void setup() {
   state = 0; // when the program loads, load the main menu
 
   dude = new Adventurer(width/2, int(height*0.8), 3, false, false, false);
-
-  buttonPlayGame = new Button("Play Game", (width/2)-150, height/4);
-  buttonExitGame = new Button("Exit Game", )
+  rectMode(CORNER);
+  buttonPlayGame = new Button("Play Game", (width/2), height/4);
+  buttonExitGame = new Button("Exit Game", (width/2), height/2);
 }
 
 void update() {

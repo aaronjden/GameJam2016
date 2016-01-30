@@ -14,7 +14,11 @@ import java.io.IOException;
 
 public class Game extends PApplet {
 
-Button buttons;
+Adventurer dude;
+
+Button buttonPlayGame;
+Button buttonExitGame;
+
 String game_name = "GGJ 2016";
 int state;
 boolean finishLevel = false;
@@ -30,7 +34,10 @@ public void setup() {
 
   state = 0; // when the program loads, load the main menu
 
-  buttons = new Button("Play Game", (width/2)-150, height/4);
+  dude = new Adventurer(width/2, PApplet.parseInt(height*0.8f), 3, false, false, false);
+  rectMode(CORNER);
+  buttonPlayGame = new Button("Play Game", (width/2), height/4);
+  buttonExitGame = new Button("Exit Game", (width/2), height/2);
 }
 
 public void update() {
@@ -38,6 +45,10 @@ public void update() {
 
 public void draw() {
   stateManager(state);
+  dude.update();
+//dude = new Adventurer (xp, yp, hp, gb, atk, def);
+//Adventurer(int xp, int yp, int hp, boolean gb, boolean atk, boolean def) {
+
 }
 /*
 character actions
@@ -45,40 +56,71 @@ character actions
  item x,y, character x,y, health, sprite gifs
  */
 class Adventurer {
-  int xpos, ypos, health, facing, xsize, ysize;
+  int xpos, ypos, health, facing;
   // coordinate from center, 3 hearts, 0 to 3, north to west
   boolean grab, attack, defend;
   //grabbing object, attacking, defending functions.
 
-  Adventurer(int xp, int yp, int xs, int ys, int hp, boolean gb, boolean atk, boolean def) {
-	xpos = xp;
-	ypos = yp;
-	xsize = xs;
-	ysize = ys;
-	grab = gb;
-	attack = atk;
-	defend = def;
 
-	/*
-	functions to make
-	boolean function for sharing coordinates with grabbed item
-	boolean for defend where touching dangerous elements nullifies damage
-	boolean for attack where if an enemy is within range, they lose health
-	function for last direction faced- from 0 to 3 north clockwise
+  Adventurer(int xp, int yp, int hp, boolean gb, boolean atk, boolean def) {
+    xpos = xp;
+    ypos = yp;
+    grab = gb;
+    attack = atk;
+    defend = def;
+    rectMode(CENTER);
+    /*
+    functions to make
+     boolean function for sharing coordinates with grabbed item
+     boolean for defend where touching dangerous elements nullifies damage
+     boolean for attack where if an enemy is within range, they lose health
+     character size is 24px
+     function for last direction faced- from 0 to 3 north clockwise
+     */
+  }
+  public void controls() {
+    if (keyPressed == true) {
+      //UP
+      if (key == 'w' && ypos > height/128) {
+        ypos= ypos-height/128;
+      }
+      //DOWN
+      if (key == 's' && ypos < height- height/128) {
+        ypos= ypos+height/128;
+      }
+      //RIGHT
+      if (key == 'd' && xpos > width/128) {
+        xpos= xpos+width/128;
+      }
+      //LEFT
+      if (key == 'a' && xpos < width- width/128 && width > width/128 ) {
+        xpos= xpos-width/128;
+      }
+    }
+  }
 
-	*/
+  public void display() {
+    fill(255);
+    rect(xpos, ypos, 24, 24);
+  }
+
+
+  public void update() {
+    controls();
+    display();
   }
 }
 /* To use this function:
  * name ofthe button and the coordinate of the top of the button
+ * Queen Huong aka Judy
  */
 
 class Button {
-  String button_name;
-  float x; //Initial X position
-  float y; //Initial Y position
-  float w = 200; //Width of the button
-  float h = 100; //Height of the button
+  private String button_name;
+  private float x; //Initial X position
+  private float y; //Initial Y position
+  private float w = 200; //Width of the button
+  private float h = 100; //Height of the button
 
   Button(String _name, float _x, float _y) {
     button_name = _name;
@@ -117,6 +159,7 @@ class Candle{
   Candle(int x, int y, int _xSize, int _ySize){
     xPos = x;
     yPos = y;
+
     xSize = _xSize;
     ySize = _ySize;
   }
@@ -139,10 +182,13 @@ public void stateManager(int _state) {
 
 public void main_menu() {
   text(game_name, (width/2) - 100, 100); //name of the game
-  buttons.showButton();
-  if (buttons.clicked()||key=='1') {
+  buttonPlayGame.showButton();
+  buttonExitGame.showButton();
+  if (buttonPlayGame.clicked()||key=='1') {
     state = 1;
     println("play button clicked or press 1");
+  } else if (buttonExitGame.clicked() || key == '2'){
+    exit();
   }
 }
 

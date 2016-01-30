@@ -12,15 +12,12 @@ class Candle{
   Candle(int x, int y, int _xSize, int _ySize){
     xPos = x;
     yPos = y;
-<<<<<<< HEAD
-    
-=======
+
     xSize = _xSize;
     ySize = _ySize;
   }
 
   void draw(){
     rect(xPos, yPos, xSize, ySize);
->>>>>>> origin/master
   }
 }
