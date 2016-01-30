@@ -21,9 +21,9 @@ class Item {
     //checks player facing variables to see if item is within the grabbing zone
     //24 has been chosen as the area range, no issues with it so far.
     if (
-      xpos - player.xfacing < 24 && 
+      xpos - player.xfacing < 24 &&
       xpos - player.xfacing > -24 &&
-      ypos - player.yfacing < 24 && 
+      ypos - player.yfacing < 24 &&
       ypos - player.yfacing > -24
       && player.grab == true
       ) {
@@ -33,6 +33,7 @@ class Item {
       grabbed = false;
     }
   }
+
   void carrying() {
     //keeps carrying the item, by matching its coordinates with the facing zone of the adventurer class
     if (grabbed == true) {
@@ -40,11 +41,13 @@ class Item {
       ypos = player.yfacing;
     }
   }
+
   void display() {
     //TEMP will display basic shape until sprite is ready
     fill(255, 255, 10, 128);
     rect(xpos, ypos, xsize, ysize);
   }
+
   void update() {
     carrying();
     grabbing();

@@ -15,17 +15,14 @@ character actions
  */
 
 class Adventurer {
-<<<<<<< HEAD
   int xpos, ypos, xsize, ysize, health, xfacing, yfacing, dropTime;
   //
   int gridSize = 64;
-=======
->>>>>>> origin/master
   // coordinate from center, 3 hearts, 0 to 3, north to west
-  private int xpos;
-  private int ypos;
-  private int health;
-  private int facing;
+  // private int xpos;
+  // private int ypos;
+  // private int health;
+  // private int facing;
 
   //grabbing object, attacking, defending functions.
   private boolean grab;
@@ -36,7 +33,7 @@ class Adventurer {
     //location of adventurer (rectmode(center))
     xpos = xp;
     ypos = yp;
-<<<<<<< HEAD
+
     //size of adventurer (should be the same size if square)
     xsize = 25;
     ysize = 25;
@@ -104,11 +101,11 @@ class Adventurer {
     }
 
     //add control actions for attacking, defending, grabbing and dropping
-=======
-    grab = gb;
-    attack = atk;
-    defend = def;
->>>>>>> origin/master
+// =======
+//     grab = gb;
+//     attack = atk;
+//     defend = def;
+// >>>>>>> origin/master
   }
 
   void display() {
@@ -145,7 +142,7 @@ class Adventurer {
     display();
   }
 
-  void controls() {
+  /*void controls() {
     /*
     if (keyPressed == true) {
      //UP
@@ -165,7 +162,7 @@ class Adventurer {
      xpos= xpos-width/128;
      }
      }
-     */
+
 
     if (forwardPressed) {
       ypos -= 2.0;
@@ -188,5 +185,5 @@ class Adventurer {
         xpos = width - 10;
       }
     }
-  }
+  }*/
 }
