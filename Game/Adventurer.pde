@@ -2,21 +2,33 @@
 character actions
  carry- item coordinates are locked to character based on position
  item x,y, character x,y, health, sprite gifs
+ //
  */
 class Adventurer {
-  int xpos, ypos, health, facing;
+  int xpos, ypos, xsize, ysize, health, xfacing, yfacing, dropTime;
+  //
+  int gridSize = 64;
   // coordinate from center, 3 hearts, 0 to 3, north to west
   boolean grab, attack, defend;
   //grabbing object, attacking, defending functions.
 
 
-  Adventurer(int xp, int yp, int hp, boolean gb, boolean atk, boolean def) {
+  Adventurer(int xp, int yp, int xf, int yf, int xs, int ys, int hp) {
+    //location of adventurer (rectmode(center))
     xpos = xp;
     ypos = yp;
-    grab = gb;
-    attack = atk;
-    defend = def;
-    rectMode(CENTER);
+    //size of adventurer (should be the same size if square)
+    xsize = 25;
+    ysize = 25;
+    //location in front of adventurer, objects in this zone can be interacted with.
+    xfacing = xf;
+    yfacing = yf;
+    //checks if the character is grabbing anything
+    grab = false;
+
+    //TO BE IMPLEMENTED: attacking and defending functions
+    attack = false;
+    defend = false;
     /*
     functions to make
      boolean function for sharing coordinates with grabbed item
@@ -28,32 +40,83 @@ class Adventurer {
   }
   void controls() {
     if (keyPressed == true) {
-      //UP
-      if (key == 'w' && ypos > height/128) {
-        ypos= ypos-height/128;
+      //directional button pressed will allow movement as long as it is not off screen
+      // UP
+      if (key == 'w' && ypos > height/(gridSize*2)) {
+        ypos= ypos-(height/gridSize);
+
+        yfacing = ypos-ysize;
+        xfacing = xpos;
       }
       //DOWN
-      if (key == 's' && ypos < height- height/128) {
-        ypos= ypos+height/128;
-      }
-      //RIGHT
-      if (key == 'd' && xpos > width/128) {
-        xpos= xpos+width/128;
+      if (key == 's' && ypos < height- (height/(gridSize*2))) {
+        ypos= ypos+(height/gridSize);
+
+        yfacing = ypos+ysize;
+        xfacing = xpos;
       }
       //LEFT
-      if (key == 'a' && xpos < width- width/128 && width > width/128 ) {
-        xpos= xpos-width/128;
+      if (key == 'a' && xpos > width/(gridSize*2)) {
+        xpos= xpos-(width/(gridSize));
+
+        xfacing = xpos-xsize;
+        yfacing = ypos;
+      }
+      //RIGHT
+      if (key == 'd' && xpos < width- (width/(gridSize*2))) {
+        xpos= xpos+(width/(gridSize));
+
+        xfacing = xpos+xsize;
+        yfacing = ypos;
+      }
+      /*spacebar to grab
+       Prevention of rapid repeated inputs is required to pick up and drop item effectively.
+       dropTime implemented as a delay.*/
+      if (key == ' ' && dropTime > 10) {
+        if (grab ==false && dropTime > 10) {
+          grab = true;
+        } else if (grab == true ) {
+          grab = false;
+          //lets go if grabbed
+        }
+        dropTime = 0; //resets dropTime variable to prevent rapid repeated inputs
       }
     }
+
+    //add control actions for attacking, defending, grabbing and dropping
   }
 
   void display() {
-    fill(255);
-    rect(xpos, ypos, 24, 24);
+    //updates screen with character visuals
+
+    //renews properties of stroke, strokeWeight, fill, and rectMode for shapes
+    stroke(0); //black outline
+    strokeWeight(1); //thin outline
+    rectMode(CENTER); //coordinates from centre of shape
+
+    //white adventurer square
+    fill(255); // white
+    rect(xpos, ypos, xsize, ysize);
+
+    //adventurer facing zone outline colour (transparent hollow white square)
+    stroke(255, 128);
+    noFill();
+    //if character is grabbing, respective outlines become thicker
+    if (grab == true) {
+      strokeWeight(3);
+    } else {
+      strokeWeight(1);
+    }
+    //adventurer facing zone- same size as adventurer square
+    rect(xfacing, yfacing, xsize, ysize);
   }
 
 
   void update() {
+    //update combines all class functions into one, less clutter on draw function.
+    dropTime++;
+    //iterates every frame for grabbing input delay
+
     controls();
     display();
   }

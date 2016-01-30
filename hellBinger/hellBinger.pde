@@ -1,8 +1,8 @@
 /*gameJam2016
  // Class by Joel Mayner
- hellBinger- by Joel Mayner, Rahmin Nassiri, Huong Khong, Aaron Dennis, Jacky Wang 
- 
- 
+ hellBinger- by Joel Mayner, Rahmin Nassiri, Huong Khong, Aaron Dennis, Jacky Wang
+
+
  */
 //TEMP VARIABLES FOR ominous glow FUNCTION
 float timer =32;
@@ -13,8 +13,8 @@ Adventurer player; //player character
 Item box; // lighter/lit match
 
 void setup() {
-  size(666, 666); //mark of the beast on a 1:1 ratio. 
-  //initialising player character 
+  size(666, 666); //mark of the beast on a 1:1 ratio.
+  //initialising player character
   player = new Adventurer(width/2, int(height*0.8), width/2, int(height*0.8)-(width/16), 48, 48, 3, false, false, false);
   //  Adventurer(int xp, int yp, int xf, int yf, int xs, int ys, int hp, boolean gb, boolean atk, boolean def) {
   box = new Item(width/8, height/8, 16, 16, false);
