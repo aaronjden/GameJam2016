@@ -17,11 +17,12 @@ class Button {
   }
 
   void showButton() {
+    rectMode(CENTER);
     fill(255);
     rect(x, y, w, h);
-
+    textAlign(CENTER);
     fill(0);
-    text(button_name, x+(w/4), y+(h/2));
+    text(button_name, x, y);
   }
 
   boolean clicked() {
