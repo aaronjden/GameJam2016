@@ -12,7 +12,7 @@ class Adventurer {
   // coordinate from center, 3 hearts, 0 to 3, north to west
   boolean grab, attack, defend; 
   //grabbing object, attacking, defending functions.
-  
+
   int spriteWidth, spriteHeight;
   int currentFrame;
   int spriteFrames;
@@ -21,7 +21,7 @@ class Adventurer {
   //required for animation and loading sprites
 
 
-  Adventurer(int xp, int yp, int xf, int yf, int xs, int ys, int hp, boolean gb, boolean atk, boolean def) {
+    Adventurer(int xp, int yp, int xf, int yf, int xs, int ys, int hp, boolean gb, boolean atk, boolean def) {
     //location of adventurer (rectmode(center))
     xpos = xp;
     ypos = yp;
@@ -45,26 +45,25 @@ class Adventurer {
      character size is 24px
      function for last direction faced- from 0 to 3 north clockwise
      */
-     
-     spriteWidth = 32;
-     spriteHeight = 32;
-     spriteFrames = 4;
-     currentFrame = 0;
-     
-     spriteDir = 3;
-     
-     leftSprites = new PImage[spriteFrames];
-     upSprites = new PImage[spriteFrames];
-     rightSprites = new PImage[spriteFrames];
-     downSprites = new PImage[spriteFrames];
-     
-     for(int i = 0; i < spriteFrames; i++){
-       leftSprites[i] = loadImage("player/left"+nf(i, 1)+".png");
-       upSprites[i] = loadImage("player/up"+nf(i, 1)+".png");
-       rightSprites[i] = loadImage("player/right"+nf(i, 1)+".png");
-       downSprites[i] = loadImage("player/down"+nf(i, 1)+".png");
-     }
-     
+
+    spriteWidth = 32;
+    spriteHeight = 32;
+    spriteFrames = 4;
+    currentFrame = 0;
+
+    spriteDir = 3;
+
+    leftSprites = new PImage[spriteFrames];
+    upSprites = new PImage[spriteFrames];
+    rightSprites = new PImage[spriteFrames];
+    downSprites = new PImage[spriteFrames];
+
+    for (int i = 0; i < spriteFrames; i++) {
+      leftSprites[i] = loadImage("player/left"+nf(i, 1)+".png");
+      upSprites[i] = loadImage("player/up"+nf(i, 1)+".png");
+      rightSprites[i] = loadImage("player/right"+nf(i, 1)+".png");
+      downSprites[i] = loadImage("player/down"+nf(i, 1)+".png");
+    }
   }
 
   void controls() {
@@ -76,7 +75,7 @@ class Adventurer {
         yfacing = ypos-ysize;
         xfacing = xpos;
       }
-      
+
       if (backwardPressed) {
         ypos += 2.0;
 
@@ -87,7 +86,7 @@ class Adventurer {
           ypos = 700;
         }
       }
-      
+
       if (leftPressed) {
         xpos -= 2.0;
 
@@ -98,7 +97,7 @@ class Adventurer {
           xpos = 0;
         }
       }
-      
+
       if (rightPressed) {
         xpos += 2.0;
 
@@ -109,7 +108,7 @@ class Adventurer {
           xpos = width - 10;
         }
       }
-      
+
       /*spacebar to grab
        Prevention of rapid repeated inputs is required to pick up and drop item effectively. 
        dropTime implemented as a delay.*/
@@ -150,36 +149,33 @@ class Adventurer {
     }
     //adventurer facing zone- same size as adventurer square
     rect(xfacing, yfacing, xsize, ysize);
-    
+
     // character animation direction based on keypress
     pushMatrix();
     pushStyle();
     imageMode(CENTER);
-    if(keyPressed) {
+    if (keyPressed) {
       if (key == 'a') {
         image(leftSprites[currentFrame], xpos, ypos);
-        if(frameCount % 10 == 0){
+        if (frameCount % 10 == 0) {
           currentFrame++;
         }
         spriteDir = 0;
-      }
-      else if (key == 'w') {
+      } else if (key == 'w') {
         image(upSprites[currentFrame], xpos, ypos);
-        if(frameCount % 10 == 0){
+        if (frameCount % 10 == 0) {
           currentFrame++;
         }
         spriteDir = 1;
-      }
-      else if (key == 'd') {
+      } else if (key == 'd') {
         image(rightSprites[currentFrame], xpos, ypos);
-        if(frameCount % 10 == 0){
+        if (frameCount % 10 == 0) {
           currentFrame++;
         }
         spriteDir = 2;
-      }
-      else if (key == 's') {
+      } else if (key == 's') {
         image(downSprites[currentFrame], xpos, ypos);
-        if(frameCount % 10 == 0){
+        if (frameCount % 10 == 0) {
           currentFrame++;
         }
         spriteDir = 3;
@@ -190,24 +186,21 @@ class Adventurer {
       }
     }
     //idle direction based on last pressed direction
-    else{
-      if(spriteDir == 0) {
+    else {
+      if (spriteDir == 0) {
         image(leftSprites[0], xpos, ypos);
         currentFrame = 0;
-      }
-      else if(spriteDir == 1) {
+      } else if (spriteDir == 1) {
         image(upSprites[0], xpos, ypos);
         currentFrame = 0;
-      }
-      else if(spriteDir == 2) {
+      } else if (spriteDir == 2) {
         image(rightSprites[0], xpos, ypos);
         currentFrame = 0;
-      }
-      else if(spriteDir == 3) {
+      } else if (spriteDir == 3) {
         image(downSprites[0], xpos, ypos);
         currentFrame = 0;
       }
-    }
+    } 
     popStyle();
     popMatrix();
   }
@@ -221,3 +214,4 @@ class Adventurer {
     display();
   }
 }
+

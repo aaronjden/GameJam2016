@@ -19,6 +19,15 @@ class Button {
     y = _y;
   }
 
+  Button(String _name, float _x, float _y, float _w, float _h) {
+    button_name = _name;
+    x = _x;
+    y = _y;
+    w = _w;
+    h = _h;
+  }
+
+
   void showButton() {
     rectMode(CENTER);
     if (mouseOver()) {
@@ -34,6 +43,20 @@ class Button {
 
     fill(255);
     text(button_name, x, y);
+  }
+
+  void changeLocation(float _x, float _y) {
+    x = _x;
+    y = _y;
+  }
+
+  void changeText(String _name) {
+    button_name = _name;
+  }
+
+  void changeSize(float _w, float _h) {
+    w = _w;
+    h = _h;
   }
 
   boolean clicked() {
@@ -52,3 +75,4 @@ class Button {
     return false;
   }
 }
+

@@ -2,6 +2,9 @@ class Enemy {
   int xpos, ypos, xsize, ysize, health;
   float speed; 
   int randRun;
+  PImage [] spider = new PImage[5];
+  int counter = 0;
+  int temp = 1;
 
   Enemy(int xp, int yp, int xs, int ys, int hp, float sp) {
     xpos = xp;
@@ -10,6 +13,9 @@ class Enemy {
     ysize = ys;
     speed = sp;
     health = hp;
+    for (int i = 0; i<4; i++) {
+      spider[i] = loadImage("sprites/spider "+ nf(i+1, 1) + ".png");
+    }
   }
 
 
@@ -51,6 +57,10 @@ class Enemy {
     rectMode(CENTER);
     fill(255, 0, 72);
     rect(xpos, ypos, xsize, ysize);
+    pushMatrix();
+    imageMode(CENTER);
+    image(spider[counter], xpos, ypos);
+    popMatrix();
   }
 
   void update() {
@@ -59,3 +69,4 @@ class Enemy {
     display();
   }
 }
+
